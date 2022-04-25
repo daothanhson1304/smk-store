@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { Logo } from '../Logo';
-import { Link } from 'react-scroll';
+import {
+  Link
+} from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import { deviceSize } from '../responsive';
 import { slide as Menu } from 'react-burger-menu';
 import styles from './menuStyles';
+import { ROUTES } from 'src/constants/constants';
 
 const Container = styled.div`
   width: 90%;
@@ -59,13 +61,16 @@ export function NavBar() {
   const navItems = (
     <NavItems>
       <NavItem>
-        <Link to='Home'>Home</Link>
+        <Link to={ROUTES.HOME}>Home</Link>
       </NavItem>
       <NavItem>
-        <Link to='Explore'>Explore</Link>
+        <Link to={ROUTES.PRODUCTS}>Products</Link>
       </NavItem>
       <NavItem>
-        <Link to='TravelPlaces'>Travel Places</Link>
+        <Link to={ROUTES.ABOUT}>About</Link>
+      </NavItem>
+      <NavItem>
+        <Link to={ROUTES.BLOGS}>Blog</Link>
       </NavItem>
     </NavItems>
   );

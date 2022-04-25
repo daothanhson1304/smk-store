@@ -1,10 +1,17 @@
-import React from 'react';
 import './App.css';
-import styled from 'styled-components';
 import tw from 'twin.macro';
-import { TopSection } from './containers/TopSection/TopSection';
-import { Footer } from './components/footer';
 import { Home } from './features/Home/Home';
+
+import { Routes, Route, Link, Outlet } from 'react-router-dom';
+import { Login } from './features/Auth/containers/Login';
+import { Register } from './features/Auth/containers/Register';
+import { Products } from './features/Home/pages/Products';
+import { ProductDetail } from './features/Home/pages/ProductDetail';
+import { TopSection } from './features/Home/components/TopSection';
+import { ROUTES } from './constants/constants';
+import { About } from './features/Home/components/About';
+import { Blogs } from './features/Home/components/Blogs';
+
 const AppContainer = tw.div`
 flex
 flex-col
@@ -16,7 +23,21 @@ overflow-hidden
 function App() {
   return (
     <AppContainer>
-      <Home />
+      {/* <Routes>
+        <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.REGISTER} element={<Register />} />
+      </Routes> */}
+      <TopSection />
+      <Routes>
+        <Route path={ROUTES.HOME} element={<Home />}></Route>
+        <Route
+          path={`${ROUTES.PRODUCTS}/:productId`}
+          element={<ProductDetail />}
+        />
+        <Route path={ROUTES.PRODUCTS} element={<Products />}></Route>
+        <Route path={ROUTES.ABOUT} element={<About></About>}></Route>
+        <Route path={ROUTES.BLOGS} element={<Blogs></Blogs>}></Route>
+      </Routes>
     </AppContainer>
   );
 }

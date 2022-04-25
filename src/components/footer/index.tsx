@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-scroll';
 import tw from 'twin.macro';
-import { Logo } from '../Logo';
 import { SiFacebook, SiInstagram, SiTwitter } from 'react-icons/si';
+import { Logo } from '../logo/index';
 
 const FooterContainer = tw.div`
     w-full
@@ -143,35 +143,35 @@ export function Footer() {
           <LeftInnerContainer>
             <Menu>
               <MenuItem>
-                <Link to='Home'>Home</Link>
+                <p>Home</p>
               </MenuItem>
               <MenuItem>
-                <Link to='Explore'>Explore</Link>
+                <p>Explore</p>
               </MenuItem>
               <MenuItem>
-                <Link to='TravelPlaces'>Travel Places</Link>
-              </MenuItem>
-            </Menu>
-            <Menu>
-              <MenuItem>
-                <Link to='#'>About Us</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to='# '>Contact Us</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to='#'>Our Travel Terms</Link>
+                <p>Travel Places</p>
               </MenuItem>
             </Menu>
             <Menu>
               <MenuItem>
-                <Link to='#'>Company</Link>
+                <p>About Us</p>
               </MenuItem>
               <MenuItem>
-                <Link to='#'>Careers</Link>
+                <p>Contact Us</p>
               </MenuItem>
               <MenuItem>
-                <Link to='#'>Travel Guide</Link>
+                <p>Our Travel Terms</p>
+              </MenuItem>
+            </Menu>
+            <Menu>
+              <MenuItem>
+                <p>Company</p>
+              </MenuItem>
+              <MenuItem>
+                <p>Careers</p>
+              </MenuItem>
+              <MenuItem>
+                <p>Travel Guide</p>
               </MenuItem>
             </Menu>
           </LeftInnerContainer>

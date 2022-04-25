@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Link } from 'react-scroll';
 import { BsArrowDownCircle } from 'react-icons/bs';
-import { NavBar } from '../../components/NavBar';
-import { Social } from '../../components/Social/Social';
-import { HeaderMain } from '../../components/HeaderMain/HeaderMain';
+import { NavBar } from '../../../components/navbar';
+import { Social } from './Social';
+import { HeaderMain } from './HeaderMain';
 
-import { Banner } from '../../components/Banner/Banner';
+import { Banner } from './Banner';
 
 const TopSectionContainer = styled.div`
   ${tw`
@@ -107,7 +107,6 @@ export const TopSection: React.FC = () => {
       <Social />
       <HeaderMain />
       <NavBar></NavBar>
-      <Banner></Banner>
     </TopSectionContainer>
   );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import BlogImageOne from '../../assets/images/blog-1.jpg';
-import BlogImageTwo from '../../assets/images/blog-2.jpg';
-import BlogImageThree from '../../assets/images/blog-3.jpg';
+import BlogImageOne from '../../../assets/images/blog-1.jpg';
+import BlogImageTwo from '../../../assets/images/blog-2.jpg';
+import BlogImageThree from '../../../assets/images/blog-3.jpg';
 
 const BlogContainer = styled.div`
   ${tw`

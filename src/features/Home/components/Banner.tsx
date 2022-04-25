@@ -1,9 +1,9 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import BannerImageOne from '../../assets/images/banner-1.jpg';
-import BannerImageTwo from '../../assets/images/banner-2.jpg';
-import BannerImageThree from '../../assets/images/banner-3.jpg';
+import BannerImageOne from '../../../assets/images/banner-1.jpg';
+import BannerImageTwo from '../../../assets/images/banner-2.jpg';
+import BannerImageThree from '../../../assets/images/banner-3.jpg';
 
 import styled from 'styled-components';
 import tw from 'twin.macro';

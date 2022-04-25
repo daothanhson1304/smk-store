@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { Logo } from '../Logo';
 import { AiOutlineUser, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
+import { Logo } from '../../../components/logo/index';
 const HeaderMainContainer = styled.div`
   ${tw`
-      my-8
+      mt-8
       flex
       justify-between
       items-center
       px-12
+      py-6
   `}
+  border-bottom: 1px solid #ededed;
+  border-top: 1px solid #ededed;
 `;
 const HeaderMainLogo = styled.div`
   ${tw`
