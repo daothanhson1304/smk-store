@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 const categoriesData = [
-  { icon: DressIcon as string, title: 'Clothes' },
+  { icon: DressIcon, title: 'Clothes' },
   { icon: ShoesIcon, title: 'Footwear' },
   { icon: JewelryIcon, title: 'Jewelry' },
   { icon: PerfumeIcon, title: 'Perfume' },
