@@ -8,7 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import { deviceSize } from '../responsive';
 import { slide as Menu } from 'react-burger-menu';
 import styles from './menuStyles';
-import { ROUTES } from 'src/constants/constants';
+import { ROUTES } from 'constants/constants';
 
 const Container = styled.div`
   width: 90%;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Link } from 'react-scroll';
 import { BsArrowDownCircle } from 'react-icons/bs';
-import { NavBar } from '../../../components/navbar';
+import { NavBar } from '../../../components/NavBar/index';
 import { Social } from './Social';
 import { HeaderMain } from './HeaderMain';
 

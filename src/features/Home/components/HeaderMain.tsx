@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 import { AiOutlineUser, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
-import { Logo } from '../../../components/logo/index';
+import { Logo } from '../../../components/Logo/index';
 const HeaderMainContainer = styled.div`
   ${tw`
       mt-8

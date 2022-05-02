@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 import { Product } from './Product';
 import { IProduct } from './types';
 import { useNavigate } from 'react-router';
-import { ROUTES } from 'src/constants/constants';
+import { ROUTES } from 'constants/constants';
 const ListProductContainer = styled.div`
   ${tw`
   `}
@@ -125,7 +125,7 @@ export const ListProduct = () => {
     <ListProductContainer>
       <Title>New Products</Title>
       <ProductGird>
-        {listProductData.map(product => (
+        {listProductData.map((product) => (
           <Product
             product={product}
             handleClickProduct={() => {

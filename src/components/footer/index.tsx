@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-scroll';
 import tw from 'twin.macro';
 import { SiFacebook, SiInstagram, SiTwitter } from 'react-icons/si';
-import { Logo } from '../logo/index';
+import { Logo } from '../Logo/index';
 
 const FooterContainer = tw.div`
     w-full
