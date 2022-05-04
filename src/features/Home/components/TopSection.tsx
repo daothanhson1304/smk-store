@@ -8,6 +8,7 @@ import { Social } from './Social';
 import { HeaderMain } from './HeaderMain';
 
 import { Banner } from './Banner';
+import { Outlet } from 'react-router';
 
 const TopSectionContainer = styled.div`
   ${tw`
@@ -103,10 +104,13 @@ const ViewMoreButton = styled.button`
 
 export const TopSection: React.FC = () => {
   return (
-    <TopSectionContainer>
-      <Social />
-      <HeaderMain />
-      <NavBar></NavBar>
-    </TopSectionContainer>
+    <>
+      <TopSectionContainer>
+        <Social />
+        <HeaderMain />
+        <NavBar></NavBar>
+      </TopSectionContainer>
+      <Outlet />
+    </>
   );
 };

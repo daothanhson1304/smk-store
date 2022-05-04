@@ -1,6 +1,6 @@
 import './App.css';
 import tw from 'twin.macro';
-import { Home } from './features/Home/Home';
+import { Home } from './features/Home/pages/Home';
 
 import { Routes, Route, Link, Outlet } from 'react-router-dom';
 import { Login } from './features/Auth/containers/Login';
@@ -23,20 +23,22 @@ overflow-hidden
 function App() {
   return (
     <AppContainer>
-      {/* <Routes>
+      <Routes>
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.REGISTER} element={<Register />} />
-      </Routes> */}
-      <TopSection />
+      </Routes>
+
       <Routes>
-        <Route path={ROUTES.HOME} element={<Home />}></Route>
-        <Route
-          path={`${ROUTES.PRODUCTS}/${ROUTES.PRODUCT_DETAIL}/:productId`}
-          element={<ProductDetail />}
-        />
-        <Route path={ROUTES.PRODUCTS} element={<Products />}></Route>
-        <Route path={ROUTES.ABOUT} element={<About></About>}></Route>
-        <Route path={ROUTES.BLOGS} element={<Blogs></Blogs>}></Route>
+        <Route path='/' element={<TopSection />}>
+          <Route path={ROUTES.HOME} element={<Home />}></Route>
+          <Route
+            path={`${ROUTES.PRODUCTS}/${ROUTES.PRODUCT_DETAIL}/:productId`}
+            element={<ProductDetail />}
+          />
+          <Route path={ROUTES.PRODUCTS} element={<Products />}></Route>
+          <Route path={ROUTES.ABOUT} element={<About></About>}></Route>
+          <Route path={ROUTES.BLOGS} element={<Blogs></Blogs>}></Route>
+        </Route>
       </Routes>
     </AppContainer>
   );
