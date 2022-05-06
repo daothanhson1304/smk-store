@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { BsArrowRight } from 'react-icons/bs';
+import PayPal from 'assets/images/paypal.png';
+import MasterCard from 'assets/images/master.png';
+import Visa from 'assets/images/visa.png';
+
 const CardDetailContainer = styled.div`
   ${tw`
     rounded-3xl
@@ -118,7 +122,15 @@ export const CardDetail = () => {
       <CardTitle>Card Detail</CardTitle>
       <CardTypes>
         <CardLabel>Card type</CardLabel>
-        <CardType></CardType>
+        <CardType>
+          <img src={MasterCard} alt='' />
+        </CardType>
+        <CardType>
+          <img src={Visa} alt='' />
+        </CardType>
+        <CardType>
+          <img src={PayPal} alt='' />
+        </CardType>
       </CardTypes>
       <CardInfo>
         <CardGroup>
