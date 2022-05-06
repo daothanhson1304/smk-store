@@ -7,6 +7,7 @@ export const ROUTES = {
   BLOGS: 'blogs',
   PRODUCT_DETAIL: 'product-detail',
   CHECKOUT: '/checkout',
+  CHECKOUT_SUCCESS: '/checkout-success',
 };
 export const SIZE = [1, 2, 3, 4, 5];
 export const listProductData = [

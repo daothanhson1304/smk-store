@@ -6,7 +6,7 @@ import { OurServices } from 'features/Home/components/OurServices';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Footer } from '../../../components/footer';
-import { useAppDispatch } from 'store/store';
+import { useAppDispatch } from 'redux/store';
 const HomeContainer = styled.div`
   ${tw`
     pt-3

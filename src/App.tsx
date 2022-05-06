@@ -3,8 +3,8 @@ import tw from 'twin.macro';
 import { Home } from './features/Home/pages/Home';
 
 import { Routes, Route, Link, Outlet } from 'react-router-dom';
-import { Login } from './features/Auth/containers/Login';
-import { Register } from './features/Auth/containers/Register';
+import { Login } from './features/Auth/pages/Login';
+import { Register } from './features/Auth/pages/Register';
 import { Products } from './features/Home/pages/Products';
 import { TopSection } from './features/Home/containers/TopSection';
 import { ROUTES } from './constants/constants';
@@ -12,6 +12,7 @@ import { About } from './features/Home/components/About';
 import { Blogs } from './features/Home/components/Blogs';
 import { ProductDetail } from './features/Home/pages/ProductDetail';
 import { Checkout } from 'features/Home/pages/Checkout';
+import { CheckoutSuccess } from 'features/Home/pages/CheckoutSuccess';
 
 const AppContainer = tw.div`
 flex
@@ -40,6 +41,10 @@ function App() {
           <Route path={ROUTES.ABOUT} element={<About></About>}></Route>
           <Route path={ROUTES.BLOGS} element={<Blogs></Blogs>}></Route>
           <Route path={ROUTES.CHECKOUT} element={<Checkout></Checkout>}></Route>
+          <Route
+            path={ROUTES.CHECKOUT_SUCCESS}
+            element={<CheckoutSuccess></CheckoutSuccess>}
+          ></Route>
         </Route>
       </Routes>
     </AppContainer>

@@ -67,10 +67,10 @@ export function NavBar() {
         <Link to={ROUTES.PRODUCTS}>Products</Link>
       </NavItem>
       <NavItem>
-        <Link to={ROUTES.ABOUT}>About</Link>
+        About
       </NavItem>
       <NavItem>
-        <Link to={ROUTES.BLOGS}>Blog</Link>
+        Blog
       </NavItem>
     </NavItems>
   );

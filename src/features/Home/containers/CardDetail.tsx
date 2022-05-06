@@ -5,6 +5,9 @@ import { BsArrowRight } from 'react-icons/bs';
 import PayPal from 'assets/images/paypal.png';
 import MasterCard from 'assets/images/master.png';
 import Visa from 'assets/images/visa.png';
+import { AiOutlineCheck } from 'react-icons/ai';
+import { useNavigate } from 'react-router';
+import { ROUTES } from 'constants/constants';
 
 const CardDetailContainer = styled.div`
   ${tw`
@@ -14,7 +17,7 @@ const CardDetailContainer = styled.div`
     px-8
     py-10
     col-span-4
-    max-h-[120vh]
+    max-h-[100vh]
   `}
   input {
     background-color: #6268c5;
@@ -23,6 +26,9 @@ const CardDetailContainer = styled.div`
     width: 100%;
     padding: 10px 30px;
     border-radius: 10px;
+  }
+  .cardActive {
+    border: 2px solid white;
   }
 `;
 const CardTitle = styled.div`
@@ -58,7 +64,7 @@ const CardInfo = styled.div`
 
   `}
 `;
-const CardTypes = styled.div`
+const CardTypesGroup = styled.div`
   ${tw`
 
   `}
@@ -108,7 +114,37 @@ const PaymentInfo = styled.div`
 
   `}
 `;
-const CardType = styled.div``;
+const CardTypes = styled.div`
+  ${tw`
+      flex
+      items-center
+      justify-between
+  `}
+  img {
+    width: 120px;
+    height: 100px;
+    object-fit: contain;
+    border: 1px solid #6066c4;
+    padding: 20px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      border: 2px solid white;
+    }
+  }
+`;
+const CardIcon = styled.div`
+  ${tw`
+    absolute
+    right-2
+    top-3
+  `}
+`;
+const CardType = styled.div`
+  ${tw`
+    relative
+  `}
+`;
 const Payment = styled.div`
   ${tw`
       pt-6
@@ -117,21 +153,50 @@ const Payment = styled.div`
   border-top: 1px solid #6066c4;
 `;
 export const CardDetail = () => {
+  const navigate = useNavigate();
+  const [listCard, setListCard] = React.useState([
+    { id: 1, image: PayPal, active: true },
+    { id: 2, image: MasterCard, active: false },
+    { id: 3, image: Visa, active: false },
+  ]);
+  const handleChooseCard = (id: number) => {
+    const newListCard = listCard.map(card => {
+      let active = false;
+      if (id === card.id) active = true;
+      return { ...card, active };
+    });
+    setListCard(newListCard);
+  };
+  const handleCheckout = () => {
+    navigate(ROUTES.CHECKOUT_SUCCESS);
+  };
   return (
     <CardDetailContainer>
       <CardTitle>Card Detail</CardTitle>
-      <CardTypes>
+      <CardTypesGroup>
         <CardLabel>Card type</CardLabel>
-        <CardType>
-          <img src={MasterCard} alt='' />
-        </CardType>
-        <CardType>
-          <img src={Visa} alt='' />
-        </CardType>
-        <CardType>
-          <img src={PayPal} alt='' />
-        </CardType>
-      </CardTypes>
+        <CardTypes>
+          {listCard.map(card => {
+            return (
+              <CardType>
+                <img
+                  src={card.image}
+                  className={card.active ? 'cardActive' : ''}
+                  alt=''
+                  onClick={() => {
+                    handleChooseCard(card.id);
+                  }}
+                />
+                {card.active && (
+                  <CardIcon>
+                    <AiOutlineCheck></AiOutlineCheck>
+                  </CardIcon>
+                )}
+              </CardType>
+            );
+          })}
+        </CardTypes>
+      </CardTypesGroup>
       <CardInfo>
         <CardGroup>
           <CardLabel>Name on Card</CardLabel>
@@ -167,7 +232,7 @@ export const CardDetail = () => {
             <PaymentPrice>$12</PaymentPrice>
           </Group>
         </PaymentInfo>
-        <PaymentButton>
+        <PaymentButton onClick={handleCheckout}>
           <TotalPrice>$1232</TotalPrice>
           <PaymentAction>
             <p>Checkout</p>
