@@ -5,7 +5,10 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 const LoginContainer = styled.div`
   ${tw`
-  min-h-screen  pb-6 px-2 md:px-0
+    min-h-screen
+    pb-6
+    px-2
+    md:px-0
   `},
   background-color: #9921e8;
   background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);

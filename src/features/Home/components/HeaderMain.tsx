@@ -52,7 +52,14 @@ const Icon = styled.div`
   cursor-pointer
 `}
 `;
-export const HeaderMain = () => {
+interface IProps {
+  onClickLoginButton: () => void;
+  onClickCheckoutButton: () => void;
+}
+export const HeaderMain: React.FC<IProps> = ({
+  onClickLoginButton,
+  onClickCheckoutButton,
+}) => {
   return (
     <HeaderMainContainer>
       <HeaderMainLogo>
@@ -63,10 +70,10 @@ export const HeaderMain = () => {
         <BsSearch></BsSearch>
       </HeaderMainSearch>
       <HeaderMainActions>
-        <Icon>
+        <Icon onClick={onClickLoginButton}>
           <AiOutlineUser></AiOutlineUser>
         </Icon>
-        <Icon>
+        <Icon onClick={onClickCheckoutButton}>
           <AiOutlineShoppingCart></AiOutlineShoppingCart>
         </Icon>
       </HeaderMainActions>

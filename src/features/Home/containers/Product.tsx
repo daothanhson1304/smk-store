@@ -7,8 +7,7 @@ import { IProduct } from './types';
 
 const ProductItem = styled.div`
   ${tw`
-    px-5
-    py-5
+    pb-5
     rounded-md
     relative
     hover:shadow-lg shadow-[#ededed]
@@ -27,7 +26,7 @@ const ProductBadge = styled.div`
 const ProductBanner = styled.div`
   ${tw``}
   img {
-    height: 200px;
+    height: 250px;
     object-fit: cover;
   }
   .product-actions {
@@ -51,6 +50,7 @@ const ProductButton = styled.div`
 const ProductContent = styled.div`
   ${tw`
       mt-3
+      px-5
   `}
 `;
 const ProductDescription = styled.div`
