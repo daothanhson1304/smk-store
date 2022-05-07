@@ -9,6 +9,9 @@ export const ROUTES = {
   CHECKOUT: '/checkout',
   CHECKOUT_SUCCESS: '/checkout-success',
 };
+export const RESPONSE_STATUS = {
+  SUCCESS: 200,
+};
 export const SIZE = [1, 2, 3, 4, 5];
 export const listProductData = [
   {
