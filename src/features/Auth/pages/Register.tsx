@@ -9,7 +9,7 @@ import * as yup from 'yup';
 import { FormEventHandler } from 'react';
 import { useAppDispatch } from 'redux/store';
 import { signUp } from '../redux/AuthSlice';
-import { ISignUpFormData } from '../types/types';
+import { ISignUpFormData, IRole } from '../types/types';
 const RegisterContainer = styled.div`
   ${tw`
       min-h-screen  pb-6 px-2 md:px-0
@@ -31,7 +31,8 @@ export const Register = () => {
   });
   const dispatch = useAppDispatch();
   const onSubmit = (data: ISignUpFormData) => {
-    dispatch(signUp(data));
+    const roles: IRole[] = [{ _id: 1, name: 'ROLE_USER' }];
+    dispatch(signUp({ ...data, roles }));
   };
   return (
     <RegisterContainer>

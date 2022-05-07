@@ -21,7 +21,7 @@ export const signIn = createAsyncThunk(
 export const signUp = createAsyncThunk(
   'auth/register',
   async (data: ISignUpFormData) => {
-    const response = await axiosInstance.post('auth/register', data);
+    const response = await axiosInstance.post('auth/signup', data);
     console.log('response', response.data.accessToken);
     return response.data;
   }
@@ -31,7 +31,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(signIn.pending, (state, action) => {})
       .addCase(signIn.fulfilled, (state, action) => {
