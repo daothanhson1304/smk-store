@@ -8,10 +8,14 @@ export interface ISignUpFormData {
   email: string;
   roles: IRole[];
 }
-
+export interface IUserInfo {
+  email: string;
+  username: string;
+}
 export interface IInitialState {
   token: string | null;
-  isLogin: boolean;
+  isAuthUser: boolean;
+  userInfo: IUserInfo;
 }
 export interface IRole {
   _id: number;
