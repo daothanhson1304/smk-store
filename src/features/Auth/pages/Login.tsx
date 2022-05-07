@@ -1,14 +1,16 @@
 import { ROUTES } from 'constants/constants';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch } from 'redux/store';
+import { useAppDispatch, useAppSelector } from 'redux/store';
 import { signIn } from '../redux/AuthSlice';
 import { ISignInFormData } from '../types/types';
+import { useNavigate } from 'react-router';
+import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
 
 const schema = yup
   .object()
@@ -28,14 +30,22 @@ const LoginContainer = styled.div`
   background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
 `;
 export const Login = () => {
+  const isLogin = useAppSelector(state => state.authReducer.isAuthUser);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm<ISignInFormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (formData: ISignInFormData) => {
-    console.log('data', formData);
-    dispatch(signIn(formData));
+  const onSubmit = async (formData: ISignInFormData) => {
+    await dispatch(showLoading());
+    await dispatch(signIn(formData));
+    await dispatch(hiddenLoading());
   };
+  React.useEffect(() => {
+    if (isLogin) {
+      navigate(-1);
+    }
+  }, [isLogin, navigate]);
   return (
     <LoginContainer>
       <main className='bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl'>

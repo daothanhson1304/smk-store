@@ -14,7 +14,7 @@ export interface IUserInfo {
 }
 export interface IInitialState {
   token: string | null;
-  isLogin: boolean;
+  isAuthUser: boolean;
   userInfo: IUserInfo;
 }
 export interface IRole {
