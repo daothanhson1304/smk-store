@@ -8,6 +8,12 @@ export const ROUTES = {
   PRODUCT_DETAIL: 'product-detail',
   CHECKOUT: '/checkout',
   CHECKOUT_SUCCESS: '/checkout-success',
+  ADMIN: 'admin',
+  CUSTOMERS: 'customers',
+  ORDERS: 'orders',
+  PRODUCTS_ADMIN: 'productsAdmin',
+  INVOICES: 'invoices',
+  ADD_OR_EDIT_PRODUCT: 'addOrEditProduct',
 };
 export const RESPONSE_STATUS = {
   SUCCESS: 200,

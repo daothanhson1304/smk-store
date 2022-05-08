@@ -5,6 +5,7 @@ import { Product } from './Product';
 import { IProduct } from './types';
 import { useNavigate } from 'react-router';
 import { listProductData, ROUTES } from 'constants/constants';
+import { useAppSelector } from 'redux/store';
 const ListProductContainer = styled.div`
   ${tw`
   `}
@@ -26,11 +27,18 @@ const Title = styled.h1`
 `;
 
 export const ListProduct = () => {
+  const { isAuthUser } = useAppSelector(state => state.authReducer);
   const navigate = useNavigate();
   const goToDetail = (product: IProduct) => {
     navigate(`${ROUTES.PRODUCT_DETAIL}/${product.id}`);
   };
-  const addProductToCart = (product: IProduct) => {};
+  const addProductToCart = (product: IProduct) => {
+    if (!isAuthUser) {
+      navigate(ROUTES.LOGIN);
+    } else {
+      navigate(ROUTES.CHECKOUT);
+    }
+  };
   return (
     <ListProductContainer>
       <Title>New Products</Title>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import BlogImage from '../../../assets/images/blog-1.jpg';
-import { listProductData } from 'constants/constants';
+import { listProductData, ROUTES } from 'constants/constants';
 import {
   BiBadge,
   BiBandAid,
@@ -13,6 +13,8 @@ import {
 import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
 import { Footer } from 'components/footer';
 import { GrAdd } from 'react-icons/gr';
+import { useAppSelector } from 'redux/store';
+import { useNavigate } from 'react-router-dom';
 
 const ProductDetailContent = styled.div`
   ${tw`
@@ -213,6 +215,12 @@ const SocialGroup = styled.div`
 `;
 export const ProductDetail = () => {
   const product = listProductData[0];
+  const { isAuthUser } = useAppSelector(state => state.authReducer);
+  const navigate = useNavigate();
+  const handleAddProduct = () => {
+    const path = isAuthUser ? ROUTES.CHECKOUT : ROUTES.LOGIN;
+    navigate(path);
+  };
   return (
     <>
       <ProductDetailContainer>
@@ -247,7 +255,9 @@ export const ProductDetail = () => {
                 </Icon>
               </FreeReturns>
             </ProductFooter>
-            <ProductButton>Add to cart</ProductButton>
+            <ProductButton onClick={handleAddProduct}>
+              Add to cart
+            </ProductButton>
             <Social>
               <SocialTitle>Share</SocialTitle>
               <SocialGroup>

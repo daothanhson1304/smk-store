@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from 'redux/store';
 import { signIn } from '../redux/AuthSlice';
 import { ISignInFormData } from '../types/types';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
 
 const schema = yup
@@ -29,10 +29,14 @@ const LoginContainer = styled.div`
   background-color: #9921e8;
   background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
 `;
+interface ILocationState {
+  previousPage: string | null;
+}
 export const Login = () => {
   const isLogin = useAppSelector(state => state.authReducer.isAuthUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { state } = useLocation();
   const { register, handleSubmit } = useForm<ISignInFormData>({
     resolver: yupResolver(schema),
   });
@@ -42,7 +46,11 @@ export const Login = () => {
     await dispatch(hiddenLoading());
   };
   React.useEffect(() => {
+    const data = state as ILocationState;
     if (isLogin) {
+      if (state && data && data.previousPage === ROUTES.REGISTER) {
+        navigate(ROUTES.HOME);
+      }
       navigate(-1);
     }
   }, [isLogin, navigate]);
@@ -50,7 +58,7 @@ export const Login = () => {
     <LoginContainer>
       <main className='bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl'>
         <section>
-          <h3 className='font-bold text-2xl'>Welcome to SMK-Store</h3>
+          <h3 className='font-bold text-2xl'>Welcome to Blueberry-Store</h3>
           <p className='text-gray-600 pt-2'>Sign in to your account.</p>
         </section>
 

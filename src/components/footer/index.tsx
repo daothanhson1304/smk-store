@@ -191,7 +191,7 @@ export function Footer() {
         </InnerContainer>
         <BottomSection>
           <Copyright>
-            © {new Date().getFullYear()} SMK. All rights reserved.
+            © {new Date().getFullYear()} Blueberry. All rights reserved.
           </Copyright>
           <SmallText>
             <a href='#'>Terms of Service</a>

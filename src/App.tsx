@@ -17,6 +17,10 @@ import ScaleLoader from 'react-spinners/ScaleLoader';
 import { css } from '@emotion/react';
 import styled from 'styled-components';
 import { useAppSelector } from 'redux/store';
+import { AdminPage } from 'features/Admin/pages/AdminPage';
+import { CustomersPage } from 'features/Admin/pages/CustomersPage';
+import { ProductsAdminPage } from 'features/Admin/pages/ProductsAdminPage';
+import { AddOrEditProductPage } from 'features/Admin/pages/AddOrEditProductPage';
 const AppContainer = styled.div`
   ${tw`
       flex
@@ -79,6 +83,19 @@ function App() {
               path={ROUTES.CHECKOUT_SUCCESS}
               element={<CheckoutSuccess></CheckoutSuccess>}
             ></Route>
+          </Route>
+        </Routes>
+        <Routes>
+          <Route path={ROUTES.ADMIN} element={<AdminPage />}>
+            <Route path={ROUTES.CUSTOMERS} element={<CustomersPage />} />
+            <Route
+              path={ROUTES.PRODUCTS_ADMIN}
+              element={<ProductsAdminPage />}
+            />
+            <Route
+              path={ROUTES.ADD_OR_EDIT_PRODUCT}
+              element={<AddOrEditProductPage />}
+            />
           </Route>
         </Routes>
       </AppContainer>

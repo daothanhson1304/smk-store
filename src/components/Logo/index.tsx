@@ -11,5 +11,5 @@ const LogoContainer = styled.div`
 `;
 
 export function Logo() {
-  return <LogoContainer>SMK</LogoContainer>;
+  return <LogoContainer>Blueberry</LogoContainer>;
 }

@@ -1,15 +1,15 @@
-import { ROUTES } from 'constants/constants';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { ROUTES } from 'constants/constants';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { FormEventHandler } from 'react';
-import { useAppDispatch } from 'redux/store';
+import { useAppDispatch, useAppSelector } from 'redux/store';
 import { signUp } from '../redux/AuthSlice';
 import { ISignUpFormData, IRole } from '../types/types';
+import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
 const RegisterContainer = styled.div`
   ${tw`
       min-h-screen  pb-6 px-2 md:px-0
@@ -30,16 +30,30 @@ export const Register = () => {
     resolver: yupResolver(schema),
   });
   const dispatch = useAppDispatch();
-  const onSubmit = (data: ISignUpFormData) => {
+  const isLogin = useAppSelector(state => state.authReducer.isAuthUser);
+
+  const navigate = useNavigate();
+  const onSubmit = async (data: ISignUpFormData) => {
+    await dispatch(showLoading());
     const roles: IRole[] = [{ _id: 1, name: 'ROLE_USER' }];
-    dispatch(signUp({ ...data, roles }));
+    await dispatch(signUp({ ...data, roles }));
+    await dispatch(hiddenLoading());
   };
+  React.useEffect(() => {
+    if (isLogin) {
+      navigate(ROUTES.LOGIN, {
+        state: {
+          previousPage: ROUTES.REGISTER,
+        },
+      });
+    }
+  }, [isLogin, navigate]);
   return (
     <RegisterContainer>
       {' '}
       <main className='bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl'>
         <section>
-          <h3 className='font-bold text-2xl'>Welcome to SMK-Store</h3>
+          <h3 className='font-bold text-2xl'>Welcome to Blueberry-Store</h3>
           <p className='text-gray-600 pt-2'>Sign up your account.</p>
         </section>
 
@@ -82,7 +96,13 @@ export const Register = () => {
             <div className='max-w-lg mx-auto text-center mb-6'>
               <p>
                 I have an account?{' '}
-                <Link to={ROUTES.LOGIN} className='font-bold hover:underline'>
+                <Link
+                  to={ROUTES.LOGIN}
+                  state={{
+                    previousPage: ROUTES.REGISTER,
+                  }}
+                  className='font-bold hover:underline'
+                >
                   Sign in
                 </Link>
                 .

@@ -4,6 +4,8 @@ import tw from 'twin.macro';
 import { AiOutlineUser, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
 import { Logo } from '../../../components/Logo/index';
+import { useAppSelector } from 'redux/store';
+import { UserInfo } from '../components/UserInfo';
 const HeaderMainContainer = styled.div`
   ${tw`
       mt-8
@@ -60,6 +62,7 @@ export const HeaderMain: React.FC<IProps> = ({
   onClickLoginButton,
   onClickCheckoutButton,
 }) => {
+  const { isAuthUser, userInfo } = useAppSelector(state => state.authReducer);
   return (
     <HeaderMainContainer>
       <HeaderMainLogo>
@@ -70,9 +73,14 @@ export const HeaderMain: React.FC<IProps> = ({
         <BsSearch></BsSearch>
       </HeaderMainSearch>
       <HeaderMainActions>
-        <Icon onClick={onClickLoginButton}>
-          <AiOutlineUser></AiOutlineUser>
-        </Icon>
+        {isAuthUser ? (
+          <UserInfo userInfo={userInfo}></UserInfo>
+        ) : (
+          <Icon onClick={onClickLoginButton}>
+            <AiOutlineUser></AiOutlineUser>
+          </Icon>
+        )}
+
         <Icon onClick={onClickCheckoutButton}>
           <AiOutlineShoppingCart></AiOutlineShoppingCart>
         </Icon>

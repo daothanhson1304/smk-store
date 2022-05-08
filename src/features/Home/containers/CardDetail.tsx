@@ -155,9 +155,9 @@ const Payment = styled.div`
 export const CardDetail = () => {
   const navigate = useNavigate();
   const [listCard, setListCard] = React.useState([
-    { id: 1, image: PayPal, active: true },
+    { id: 1, image: PayPal, active: false },
     { id: 2, image: MasterCard, active: false },
-    { id: 3, image: Visa, active: false },
+    { id: 3, image: Visa, active: true },
   ]);
   const handleChooseCard = (id: number) => {
     const newListCard = listCard.map(card => {

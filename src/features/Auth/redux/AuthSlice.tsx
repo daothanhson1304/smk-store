@@ -9,10 +9,10 @@ import { useNavigate } from 'react-router';
 
 const initialState: IInitialState = {
   token: localStorage.getItem('token') || '',
-  isAuthUser: JSON.parse(localStorage.getItem('isAuthUser') || 'false'),
+  isAuthUser: JSON.parse(localStorage.getItem('isAuthUser') || 'true'),
   userInfo: {
-    username: localStorage.getItem('userName') || '',
-    email: localStorage.getItem('userEmail') || '',
+    username: localStorage.getItem('userName') || 'daoson',
+    email: localStorage.getItem('userEmail') || 'daothanhsondz1304@gmail.com',
   },
 };
 export const signIn = createAsyncThunk(
@@ -36,9 +36,7 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(signIn.pending, (state, action) => {
-        console.log('pending', action);
-      })
+      .addCase(signIn.pending, (state, action) => {})
       .addCase(signIn.fulfilled, (state, action) => {
         const data = action.payload;
         const { accessToken, email, username } = data;
@@ -50,11 +48,10 @@ const authSlice = createSlice({
         state.isAuthUser = true;
         state.token = accessToken;
         state.userInfo = { email, username };
-      });
-    builder
-      .addCase(signUp.pending, (state, action) => {
-        console.log('pending', action);
       })
+      .addCase(signIn.rejected, (state, action) => {});
+    builder
+      .addCase(signUp.pending, (state, action) => {})
       .addCase(signUp.fulfilled, (state, action) => {
         // const data = action.payload.result.data;
         // const { accessToken, email, username } = data;
@@ -62,10 +59,9 @@ const authSlice = createSlice({
         // state.isLogin = true;
         // state.token = accessToken;
         // const navigate = useNavigate();
-        console.log('success');
         // navigate(-1);
-      });
-    // .addCase(signIn.rejected, (state, action) => {});
+      })
+      .addCase(signUp.rejected, (state, action) => {});
   },
 });
 
