@@ -41,9 +41,9 @@ export const Login = () => {
     resolver: yupResolver(schema),
   });
   const onSubmit = async (formData: ISignInFormData) => {
-    await dispatch(showLoading());
+    dispatch(showLoading());
     await dispatch(signIn(formData));
-    await dispatch(hiddenLoading());
+    dispatch(hiddenLoading());
   };
   React.useEffect(() => {
     const data = state as ILocationState;

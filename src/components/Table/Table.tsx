@@ -51,8 +51,8 @@ const ActionCol = styled.div`
 `;
 interface IProps {
   data: any;
-  handleDelete?: () => void;
-  handleEdit?: () => void;
+  handleDelete?: (id: number) => void;
+  handleEdit?: (id: number) => void;
 }
 export const Table: React.FC<IProps> = ({ data, handleEdit, handleDelete }) => {
   const keys = data && data.length > 0 && Object.keys(data[0]);
@@ -79,12 +79,20 @@ export const Table: React.FC<IProps> = ({ data, handleEdit, handleDelete }) => {
                     <TdCustom>
                       <ActionCol>
                         {handleEdit && (
-                          <Icon onClick={handleEdit}>
+                          <Icon
+                            onClick={() => {
+                              handleEdit(item.id);
+                            }}
+                          >
                             <AiOutlineEdit></AiOutlineEdit>
                           </Icon>
                         )}
                         {handleDelete && (
-                          <Icon onClick={handleDelete}>
+                          <Icon
+                            onClick={() => {
+                              handleDelete(item.id);
+                            }}
+                          >
                             <AiOutlineDelete></AiOutlineDelete>
                           </Icon>
                         )}

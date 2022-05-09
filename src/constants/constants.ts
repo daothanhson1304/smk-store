@@ -19,6 +19,10 @@ export const RESPONSE_STATUS = {
   SUCCESS: 200,
 };
 export const SIZE = [1, 2, 3, 4, 5];
+export const GENDER = {
+  MALE: 1,
+  FEMALE: 2,
+};
 export const listProductData = [
   {
     id: 1,
