@@ -98,6 +98,7 @@ export const SideBarContent = () => {
       icon: <AiOutlineShareAlt />,
       text: 'Invoices',
       active: false,
+      path: ROUTES.INVOICES,
     },
   ]);
   const navigate = useNavigate();

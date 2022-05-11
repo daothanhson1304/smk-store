@@ -34,7 +34,7 @@ interface ILocationState {
   fromAdminPage?: boolean;
 }
 export const Login = () => {
-  const { isAuthUser, roles } = useAppSelector((state) => state.authReducer);
+  const { isAuthUser } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { state } = useLocation();

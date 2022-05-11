@@ -80,6 +80,7 @@ export const Table: React.FC<IProps> = ({ data, handleEdit, handleDelete }) => {
         </THeadCustom>
         <TBodyCustom>
           {data &&
+            data.length > 0 &&
             data.map((item: any) => {
               return (
                 <TrCustom>

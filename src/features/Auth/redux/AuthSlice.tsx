@@ -3,17 +3,21 @@ import {
   ISignInFormData,
   IInitialState,
   ISignUpFormData,
+  IUserInfo,
 } from '../types/types';
 import axiosInstance from 'api/api';
-const roles = localStorage.getItem('roles');
+const userInfo = localStorage.getItem('userInfo');
 const initialState: IInitialState = {
-  token: localStorage.getItem('token') || '',
   isAuthUser: JSON.parse(localStorage.getItem('isAuthUser') || 'false'),
-  userInfo: {
-    username: localStorage.getItem('userName') || '',
-    email: localStorage.getItem('userEmail') || '',
-  },
-  roles: roles ? JSON.parse(roles) : [],
+  userInfo: userInfo
+    ? JSON.parse(userInfo)
+    : {
+        email: '',
+        username: '',
+        token: '',
+        roles: [],
+        id: -1,
+      },
 };
 export const signIn = createAsyncThunk(
   'auth/signIn',
@@ -39,16 +43,18 @@ const authSlice = createSlice({
       .addCase(signIn.pending, (state, action) => {})
       .addCase(signIn.fulfilled, (state, action) => {
         const data = action.payload;
-        const { accessToken, email, username, roles } = data;
-        localStorage.setItem('token', accessToken);
-        localStorage.setItem('userName', username);
-        localStorage.setItem('userEmail', username);
+        const { accessToken, email, username, roles, id } = data;
+        const userInfo: IUserInfo = {
+          token: accessToken,
+          email,
+          username,
+          roles,
+          id,
+        };
         localStorage.setItem('isAuthUser', 'true');
-        localStorage.setItem('roles', JSON.stringify(roles));
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
         state.isAuthUser = true;
-        state.token = accessToken;
-        state.userInfo = { email, username };
-        state.roles = roles;
+        state.userInfo = userInfo;
       })
       .addCase(signIn.rejected, (state, action) => {});
     builder

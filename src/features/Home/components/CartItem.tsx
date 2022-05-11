@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 import BannerImageOne from '../../../assets/images/banner-1.jpg';
 import { AiOutlineDelete, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { IOrder } from 'features/Admin/types/types';
 const CartItemContainer = styled.div`
   ${tw`
       grid
@@ -88,36 +89,49 @@ const Quantity = styled.div`
 `}
   border: 1px solid #ededed;
 `;
-export const CartItem = () => {
-  const product = listProductData[0];
+interface IProps {
+  order: IOrder;
+  onDelete?: (id: number) => void;
+  hiddenAction?: boolean;
+}
+export const CartItem: React.FC<IProps> = ({
+  order,
+  onDelete,
+  hiddenAction,
+}) => {
   return (
     <CartItemContainer>
       <ProductInfo>
-        <img src={BannerImageOne} alt='' />
+        <img src={order.productImage} alt='' />
         <ProductContent>
-          <ProductTitle>{product.title}</ProductTitle>
-          <ProductDescription>{product.description}</ProductDescription>
+          <ProductTitle>{order.productTitle}</ProductTitle>
+          <ProductDescription>{order.productDes}</ProductDescription>
         </ProductContent>
       </ProductInfo>
-      <ProductActions>
-        <ProductQuantity>
-          <Icon>
-            <AiOutlinePlus></AiOutlinePlus>
-          </Icon>
-          <Quantity>{product.quantity}</Quantity>
-          <Icon>
-            <AiOutlineMinus></AiOutlineMinus>
-          </Icon>
-        </ProductQuantity>
-        <ProductTotalPrice>{`$${
-          product.quantity * (product.price - product.sale)
-        }`}</ProductTotalPrice>
-        <ProductDeleteButton>
-          <Icon>
-            <AiOutlineDelete></AiOutlineDelete>
-          </Icon>
-        </ProductDeleteButton>
-      </ProductActions>
+      {!hiddenAction && (
+        <ProductActions>
+          <ProductQuantity>
+            <Icon>
+              <AiOutlinePlus></AiOutlinePlus>
+            </Icon>
+            <Quantity>{order.quantity}</Quantity>
+            <Icon>
+              <AiOutlineMinus></AiOutlineMinus>
+            </Icon>
+          </ProductQuantity>
+          <ProductTotalPrice>{order.totalPrice}</ProductTotalPrice>
+          <ProductDeleteButton
+            onClick={() => {
+              const id = order.id ? order.id : 0;
+              onDelete && onDelete(id);
+            }}
+          >
+            <Icon>
+              <AiOutlineDelete></AiOutlineDelete>
+            </Icon>
+          </ProductDeleteButton>
+        </ProductActions>
+      )}
     </CartItemContainer>
   );
 };

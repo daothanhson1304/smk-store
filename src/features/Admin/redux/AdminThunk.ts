@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from 'api/api';
-import { IProduct } from '../types/types';
+import { IInvoice, IInvoiceRequest, IProduct } from '../types/types';
 
 export const addProduct = createAsyncThunk(
   'admin/addProduct',
@@ -51,6 +51,43 @@ export const deleteCustomer = createAsyncThunk(
   'admin/deleteCustomer',
   async (id: number) => {
     const response = await axiosInstance.delete(`user/delete/${id}`);
+    return response.data;
+  }
+);
+export const addInvoice = createAsyncThunk(
+  'admin/addInvoice',
+  async (data: IInvoice) => {
+    const response = await axiosInstance.post(`invoice/add`, data);
+    return response.data;
+  }
+);
+export const getAllInvoice = createAsyncThunk(
+  'admin/getAllInvoice',
+  async (userId: number) => {
+    const response = await axiosInstance.get(
+      `invoice/getInvoiceOfUser/${userId}`
+    );
+    return response.data;
+  }
+);
+export const deleteInvoice = createAsyncThunk(
+  'admin/deleteInvoice',
+  async (id: number) => {
+    const response = await axiosInstance.delete(`invoice/delete/${id}`);
+    return response.data;
+  }
+);
+export const getAllInvoices = createAsyncThunk(
+  'admin/getAllInvoices',
+  async () => {
+    const response = await axiosInstance.get(`invoice/getAll`);
+    return response.data;
+  }
+);
+export const updateInvoices = createAsyncThunk(
+  'admin/updateInvoices',
+  async (data: any) => {
+    const response = await axiosInstance.put(`invoice/update`, data);
     return response.data;
   }
 );

@@ -17,7 +17,7 @@ const CardDetailContainer = styled.div`
     px-8
     py-10
     col-span-4
-    max-h-[100vh]
+    max-h-[120vh]
   `}
   input {
     background-color: #6268c5;
@@ -152,7 +152,10 @@ const Payment = styled.div`
   `}
   border-top: 1px solid #6066c4;
 `;
-export const CardDetail = () => {
+interface IProps {
+  checkout: () => void;
+}
+export const CardDetail: React.FC<IProps> = ({ checkout }) => {
   const navigate = useNavigate();
   const [listCard, setListCard] = React.useState([
     { id: 1, image: PayPal, active: false },
@@ -160,15 +163,12 @@ export const CardDetail = () => {
     { id: 3, image: Visa, active: true },
   ]);
   const handleChooseCard = (id: number) => {
-    const newListCard = listCard.map(card => {
+    const newListCard = listCard.map((card) => {
       let active = false;
       if (id === card.id) active = true;
       return { ...card, active };
     });
     setListCard(newListCard);
-  };
-  const handleCheckout = () => {
-    navigate(ROUTES.CHECKOUT_SUCCESS);
   };
   return (
     <CardDetailContainer>
@@ -176,7 +176,7 @@ export const CardDetail = () => {
       <CardTypesGroup>
         <CardLabel>Card type</CardLabel>
         <CardTypes>
-          {listCard.map(card => {
+          {listCard.map((card) => {
             return (
               <CardType>
                 <img
@@ -232,7 +232,7 @@ export const CardDetail = () => {
             <PaymentPrice>$12</PaymentPrice>
           </Group>
         </PaymentInfo>
-        <PaymentButton onClick={handleCheckout}>
+        <PaymentButton onClick={checkout}>
           <TotalPrice>$1232</TotalPrice>
           <PaymentAction>
             <p>Checkout</p>

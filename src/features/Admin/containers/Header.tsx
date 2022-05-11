@@ -57,7 +57,13 @@ export const Header = () => {
           </Icon>
         </GroupIcon>
         <UserInfo
-          userInfo={{ username: 'Admin', email: 'admin' }}
+          userInfo={{
+            username: 'Admin',
+            email: 'admin',
+            roles: [],
+            token: '',
+            id: -1,
+          }}
           adminPage={true}
         ></UserInfo>
       </HeaderRight>

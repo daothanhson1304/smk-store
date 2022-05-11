@@ -21,6 +21,7 @@ import { AdminPage } from 'features/Admin/pages/AdminPage';
 import { CustomersPage } from 'features/Admin/pages/CustomersPage';
 import { ProductsAdminPage } from 'features/Admin/pages/ProductsAdminPage';
 import { AddOrEditProductPage } from 'features/Admin/pages/AddOrEditProductPage';
+import { InvoicesPage } from 'features/Admin/pages/Invoices';
 const AppContainer = styled.div`
   ${tw`
       flex
@@ -50,7 +51,7 @@ const override = css`
   display: block;
 `;
 function App() {
-  const isLoading = useAppSelector(state => state.appReducer.isLoading);
+  const isLoading = useAppSelector((state) => state.appReducer.isLoading);
   return (
     <>
       {isLoading && (
@@ -96,6 +97,7 @@ function App() {
               path={ROUTES.ADD_OR_EDIT_PRODUCT}
               element={<AddOrEditProductPage />}
             />
+            <Route path={ROUTES.INVOICES} element={<InvoicesPage />} />
           </Route>
         </Routes>
       </AppContainer>

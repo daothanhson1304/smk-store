@@ -4,8 +4,11 @@ import { ICustomer, IInitialAdminState } from '../types/types';
 import {
   addProduct,
   deleteCustomer,
+  deleteInvoice,
   deleteProduct,
   getAllCustomer,
+  getAllInvoice,
+  getAllInvoices,
   getAllProduct,
   getProductById,
 } from './AdminThunk';
@@ -13,6 +16,8 @@ import {
 const initialState: IInitialAdminState = {
   customers: [],
   products: [],
+  orders: [],
+  invoices: [],
 };
 
 const adminSlice = createSlice({
@@ -68,6 +73,43 @@ const adminSlice = createSlice({
       .addCase(getProductById.pending, (state, action) => {})
       .addCase(getProductById.fulfilled, (state, action) => {})
       .addCase(getProductById.rejected, (state, action) => {});
+    builder
+      .addCase(getAllInvoice.pending, (state, action) => {})
+      .addCase(getAllInvoice.fulfilled, (state, action) => {
+        state.orders = action.payload;
+      })
+      .addCase(getAllInvoice.rejected, (state, action) => {});
+    builder
+      .addCase(deleteInvoice.pending, (state, action) => {})
+      .addCase(deleteInvoice.fulfilled, (state, action) => {
+        state.orders = state.orders.filter(
+          (order) => order.id !== action.payload
+        );
+      })
+      .addCase(deleteInvoice.rejected, (state, action) => {});
+    builder
+      .addCase(getAllInvoices.pending, (state, action) => {})
+      .addCase(getAllInvoices.fulfilled, (state, action) => {
+        state.invoices = action.payload.map((item: any) => {
+          const {
+            userId,
+            totalPrice,
+            status,
+            quantity,
+            productId,
+            time_created,
+          } = item;
+          return {
+            userId,
+            productId,
+            quantity,
+            totalPrice,
+            status,
+            createAt: '' + time_created,
+          };
+        });
+      })
+      .addCase(getAllInvoices.rejected, (state, action) => {});
   },
 });
 

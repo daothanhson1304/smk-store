@@ -8,7 +8,8 @@ const axiosInstance = axios.create({
   responseType: 'json',
 });
 axiosInstance.interceptors.request.use((request: any) => {
-  const token = localStorage.getItem('token');
+  const userInfo = localStorage.getItem('userInfo');
+  const token = userInfo ? JSON.parse(userInfo).token : '';
   const accessHeader = token ? `Bearer ${token}` : `Bearer`;
   request.headers['Authorization'] = accessHeader;
   return request;

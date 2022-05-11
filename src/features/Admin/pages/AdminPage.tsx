@@ -25,8 +25,8 @@ const RouterOutLet = styled.div`
 `;
 export const AdminPage = () => {
   const navigate = useNavigate();
-  const { isAuthUser, roles } = useAppSelector((state) => state.authReducer);
-  console.log('hasAdmin', roles.includes(ROLES.ADMIN));
+  const { isAuthUser, userInfo } = useAppSelector((state) => state.authReducer);
+  const { roles } = userInfo;
   const isAdmin = roles.includes(ROLES.ADMIN);
   React.useEffect(() => {
     if (!isAuthUser || !isAdmin) {

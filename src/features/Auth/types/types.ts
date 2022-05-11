@@ -14,12 +14,13 @@ export interface ISignUpFormData {
 export interface IUserInfo {
   email: string;
   username: string;
+  token: string | null;
+  roles: string[];
+  id: number;
 }
 export interface IInitialState {
-  token: string | null;
-  isAuthUser: boolean;
   userInfo: IUserInfo;
-  roles: string[];
+  isAuthUser: boolean;
 }
 export interface IRole {
   id: number;

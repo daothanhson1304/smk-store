@@ -4,8 +4,10 @@ import tw from 'twin.macro';
 import { Product } from './Product';
 import { useNavigate } from 'react-router';
 import { ROUTES } from 'constants/constants';
-import { useAppSelector } from 'redux/store';
+import { useAppDispatch, useAppSelector } from 'redux/store';
 import { IProduct } from 'features/Admin/types/types';
+import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
+import { addInvoice } from 'features/Admin/redux/AdminThunk';
 const ListProductContainer = styled.div`
   ${tw`
   `}
@@ -34,10 +36,23 @@ export const ListProduct: React.FC<IProps> = ({ products }) => {
   const goToDetail = (product: IProduct) => {
     navigate(`${ROUTES.PRODUCT_DETAIL}/${product.id}`);
   };
-  const addProductToCart = (product: IProduct) => {
+  const { id } = useAppSelector((state) => state.authReducer.userInfo);
+  const dispatch = useAppDispatch();
+  const addProductToCart = async (product: IProduct) => {
     if (!isAuthUser) {
       navigate(ROUTES.LOGIN);
     } else {
+      dispatch(showLoading());
+      const userId = id ? id : 0;
+      const param = {
+        userId: userId,
+        productId: product.id,
+        quantity: 1,
+        totalPrice: product.price - product.sale,
+        status: 0,
+      };
+      await dispatch(addInvoice(param));
+      dispatch(hiddenLoading());
       navigate(ROUTES.CHECKOUT);
     }
   };

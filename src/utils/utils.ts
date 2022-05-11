@@ -11,5 +11,12 @@ export const renderProductStatus = (status: number) => {
     '2': 'SALE',
     '3': 'NEW',
   };
-  return statusData[`${status}`];
+  return statusData[`${status}`] || '';
+};
+export const renderOrderStatus = (status: number) => {
+  const statusData: any = {
+    '0': 'Unpaid',
+    '1': 'Paid',
+  };
+  return statusData[`${status}`] || '';
 };
