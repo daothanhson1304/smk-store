@@ -1,5 +1,7 @@
+import { ROLES, ROUTES } from 'constants/constants';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useAppSelector } from 'redux/store';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Header } from '../containers/Header';
@@ -22,6 +24,21 @@ const RouterOutLet = styled.div`
   `}
 `;
 export const AdminPage = () => {
+  const navigate = useNavigate();
+  const { isAuthUser, roles } = useAppSelector((state) => state.authReducer);
+  console.log('hasAdmin', roles.includes(ROLES.ADMIN));
+  const isAdmin = roles.includes(ROLES.ADMIN);
+  React.useEffect(() => {
+    if (!isAuthUser || !isAdmin) {
+      navigate(ROUTES.LOGIN);
+    } else if (isAuthUser && !isAdmin) {
+      navigate(ROUTES.LOGIN, {
+        state: {
+          fromAdminPage: false,
+        },
+      });
+    }
+  }, [isAuthUser, navigate, roles]);
   return (
     <AdminPageContainer>
       <SideBar></SideBar>

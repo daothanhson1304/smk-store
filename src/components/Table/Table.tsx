@@ -8,8 +8,14 @@ const TableCustom = styled.table`
       shadow-xl
       divide-y
     bg-[#f8f9fd]
-
   `}
+  thead {
+    tr {
+      td {
+        text-transform: capitalize;
+      }
+    }
+  }
 `;
 const THeadCustom = styled.thead`
   ${tw`
@@ -23,9 +29,15 @@ const TrCustom = styled.tr`
 `;
 const TdCustom = styled.td`
   ${tw`
-    text-xl
-    p-6
+    text-sm
+    p-4
   `}
+  img {
+    object-fit: cover;
+    width: 200px;
+    height: 150px;
+    border-radius: 20px;
+  }
 `;
 const TBodyCustom = styled.tbody`
   ${tw`
@@ -73,6 +85,18 @@ export const Table: React.FC<IProps> = ({ data, handleEdit, handleDelete }) => {
                 <TrCustom>
                   {keys &&
                     keys.map((key: any) => {
+                      if (
+                        typeof item[key] === 'string' &&
+                        item[key].includes(
+                          'https://firebasestorage.googleapis.com/'
+                        )
+                      ) {
+                        return (
+                          <TdCustom>
+                            <img src={item[key]} alt='' />
+                          </TdCustom>
+                        );
+                      }
                       return <TdCustom>{item[key]}</TdCustom>;
                     })}
                   {hasAction && (

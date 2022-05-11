@@ -17,6 +17,7 @@
     "@types/yup": "^0.29.13",
     "autoprefixer": "^9",
     "axios": "^0.26.1",
+    "firebase": "^9.8.1",
     "postcss": "^7",
     "react": "^18.0.0",
     "react-burger-menu": "^3.0.6",

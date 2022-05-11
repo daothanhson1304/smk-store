@@ -72,7 +72,6 @@ export const SideBarContent = () => {
       icon: <AiOutlineGold />,
       text: 'Analytics',
       active: true,
-      path: ROUTES.ADMIN,
     },
     {
       id: 2,
@@ -86,7 +85,6 @@ export const SideBarContent = () => {
       icon: <AiOutlineMonitor />,
       text: 'Orders',
       active: false,
-      path: ROUTES.ORDERS,
     },
     {
       id: 4,
@@ -100,23 +98,22 @@ export const SideBarContent = () => {
       icon: <AiOutlineShareAlt />,
       text: 'Invoices',
       active: false,
-      path: ROUTES.INVOICES,
     },
   ]);
   const navigate = useNavigate();
   const handleClickNavBar = (currentItem: any) => {
-    const newMenuBar = menuBar.map(item => {
+    const newMenuBar = menuBar.map((item) => {
       const active = currentItem.id === item.id ? true : false;
       return { ...item, active };
     });
     setMenuBar(newMenuBar);
-    navigate(currentItem.path);
+    currentItem.path && navigate(currentItem.path);
   };
   return (
     <SideBarContentContainer>
       <Title>Management</Title>
       <MenuBar>
-        {menuBar.map(item => {
+        {menuBar.map((item) => {
           return (
             <NavMenu
               onClick={() => {

@@ -5,15 +5,15 @@ import {
   ISignUpFormData,
 } from '../types/types';
 import axiosInstance from 'api/api';
-import { useNavigate } from 'react-router';
-
+const roles = localStorage.getItem('roles');
 const initialState: IInitialState = {
   token: localStorage.getItem('token') || '',
-  isAuthUser: JSON.parse(localStorage.getItem('isAuthUser') || 'true'),
+  isAuthUser: JSON.parse(localStorage.getItem('isAuthUser') || 'false'),
   userInfo: {
-    username: localStorage.getItem('userName') || 'daoson',
-    email: localStorage.getItem('userEmail') || 'daothanhsondz1304@gmail.com',
+    username: localStorage.getItem('userName') || '',
+    email: localStorage.getItem('userEmail') || '',
   },
+  roles: roles ? JSON.parse(roles) : [],
 };
 export const signIn = createAsyncThunk(
   'auth/signIn',
@@ -34,20 +34,21 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(signIn.pending, (state, action) => {})
       .addCase(signIn.fulfilled, (state, action) => {
         const data = action.payload;
-        const { accessToken, email, username } = data;
+        const { accessToken, email, username, roles } = data;
         localStorage.setItem('token', accessToken);
         localStorage.setItem('userName', username);
         localStorage.setItem('userEmail', username);
         localStorage.setItem('isAuthUser', 'true');
-
+        localStorage.setItem('roles', JSON.stringify(roles));
         state.isAuthUser = true;
         state.token = accessToken;
         state.userInfo = { email, username };
+        state.roles = roles;
       })
       .addCase(signIn.rejected, (state, action) => {});
     builder
@@ -56,7 +57,7 @@ const authSlice = createSlice({
         // const data = action.payload.result.data;
         // const { accessToken, email, username } = data;
         // localStorage.setItem('token', accessToken);
-        // state.isLogin = true;
+        // state.isAuthUser = true;
         // state.token = accessToken;
         // const navigate = useNavigate();
         // navigate(-1);

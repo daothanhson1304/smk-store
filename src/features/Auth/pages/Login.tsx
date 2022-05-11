@@ -1,4 +1,4 @@
-import { ROUTES } from 'constants/constants';
+import { ROLES, ROUTES } from 'constants/constants';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -30,10 +30,11 @@ const LoginContainer = styled.div`
   background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
 `;
 interface ILocationState {
-  previousPage: string | null;
+  previousPage?: string;
+  fromAdminPage?: boolean;
 }
 export const Login = () => {
-  const isLogin = useAppSelector(state => state.authReducer.isAuthUser);
+  const { isAuthUser, roles } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -47,13 +48,13 @@ export const Login = () => {
   };
   React.useEffect(() => {
     const data = state as ILocationState;
-    if (isLogin) {
+    if (isAuthUser) {
       if (state && data && data.previousPage === ROUTES.REGISTER) {
         navigate(ROUTES.HOME);
       }
       navigate(-1);
     }
-  }, [isLogin, navigate]);
+  }, [isAuthUser, navigate, state]);
   return (
     <LoginContainer>
       <main className='bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl'>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import BlogImage from '../../../assets/images/blog-1.jpg';
@@ -13,8 +13,12 @@ import {
 import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
 import { Footer } from 'components/footer';
 import { GrAdd } from 'react-icons/gr';
-import { useAppSelector } from 'redux/store';
+import { useAppDispatch, useAppSelector } from 'redux/store';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
+import { getProductById } from 'features/Admin/redux/AdminThunk';
+import { IProduct } from 'features/Admin/types/types';
 
 const ProductDetailContent = styled.div`
   ${tw`
@@ -214,66 +218,85 @@ const SocialGroup = styled.div`
 `}
 `;
 export const ProductDetail = () => {
-  const product = listProductData[0];
-  const { isAuthUser } = useAppSelector(state => state.authReducer);
+  const { isAuthUser } = useAppSelector((state) => state.authReducer);
   const navigate = useNavigate();
   const handleAddProduct = () => {
     const path = isAuthUser ? ROUTES.CHECKOUT : ROUTES.LOGIN;
     navigate(path);
   };
+  const [product, setProduct] = React.useState<any>();
+  const dispatch = useAppDispatch();
+  let params = useParams();
+
+  useEffect(() => {
+    const getData = async () => {
+      dispatch(showLoading());
+      if (params.productId) {
+        const response = await dispatch(
+          getProductById(Number(params.productId))
+        );
+        console.log('response', response);
+        response && setProduct(response.payload);
+      }
+      dispatch(hiddenLoading());
+    };
+    getData();
+  }, []);
   return (
     <>
       <ProductDetailContainer>
-        <ProductDetailContent>
-          <ProductImage>
-            <img src={BlogImage} alt='' />
-          </ProductImage>
-          <ProductContent>
-            <ProductTitle>{product.title}</ProductTitle>
-            <ProductPrice>
-              <Label>Price:</Label>
-              <LastPrice>{`$${
-                product.sale ? product.price - product.sale : product.price
-              }`}</LastPrice>
-              {product.sale && <Price>{`$${product.price}`}</Price>}
-            </ProductPrice>
-            <ProductDescription>
-              <Label>Description:</Label>
-              {product.description}
-            </ProductDescription>
-            <ProductFooter>
-              <Delivery>
-                <p>Delivery</p>
-                <Icon>
-                  <GrAdd />
-                </Icon>
-              </Delivery>
-              <FreeReturns>
-                <p>Free returns</p>
-                <Icon>
-                  <GrAdd />
-                </Icon>
-              </FreeReturns>
-            </ProductFooter>
-            <ProductButton onClick={handleAddProduct}>
-              Add to cart
-            </ProductButton>
-            <Social>
-              <SocialTitle>Share</SocialTitle>
-              <SocialGroup>
-                <SocialIcon>
-                  <BsFacebook />
-                </SocialIcon>
-                <SocialIcon>
-                  <BsTwitter />
-                </SocialIcon>
-                <SocialIcon>
-                  <BsInstagram />
-                </SocialIcon>
-              </SocialGroup>
-            </Social>
-          </ProductContent>
-        </ProductDetailContent>
+        {product && (
+          <ProductDetailContent>
+            <ProductImage>
+              <img src={product.image} alt='' />
+            </ProductImage>
+            <ProductContent>
+              <ProductTitle>{product.title}</ProductTitle>
+              <ProductPrice>
+                <Label>Price:</Label>
+                <LastPrice>{`$${
+                  product.sale ? product.price - product.sale : product.price
+                }`}</LastPrice>
+                {product.sale && <Price>{`$${product.price}`}</Price>}
+              </ProductPrice>
+              <ProductDescription>
+                <Label>Description:</Label>
+                {product.description}
+              </ProductDescription>
+              <ProductFooter>
+                <Delivery>
+                  <p>Delivery</p>
+                  <Icon>
+                    <GrAdd />
+                  </Icon>
+                </Delivery>
+                <FreeReturns>
+                  <p>Free returns</p>
+                  <Icon>
+                    <GrAdd />
+                  </Icon>
+                </FreeReturns>
+              </ProductFooter>
+              <ProductButton onClick={handleAddProduct}>
+                Add to cart
+              </ProductButton>
+              <Social>
+                <SocialTitle>Share</SocialTitle>
+                <SocialGroup>
+                  <SocialIcon>
+                    <BsFacebook />
+                  </SocialIcon>
+                  <SocialIcon>
+                    <BsTwitter />
+                  </SocialIcon>
+                  <SocialIcon>
+                    <BsInstagram />
+                  </SocialIcon>
+                </SocialGroup>
+              </Social>
+            </ProductContent>
+          </ProductDetailContent>
+        )}
         <ServicesContainer>
           <ServiceItem>
             <ServiceIcon>

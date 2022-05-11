@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Product } from './Product';
-import { IProduct } from './types';
 import { useNavigate } from 'react-router';
-import { listProductData, ROUTES } from 'constants/constants';
+import { ROUTES } from 'constants/constants';
 import { useAppSelector } from 'redux/store';
+import { IProduct } from 'features/Admin/types/types';
 const ListProductContainer = styled.div`
   ${tw`
   `}
@@ -25,9 +25,11 @@ const Title = styled.h1`
   `}
   border-bottom: 1px solid #ededed;
 `;
-
-export const ListProduct = () => {
-  const { isAuthUser } = useAppSelector(state => state.authReducer);
+interface IProps {
+  products: IProduct[];
+}
+export const ListProduct: React.FC<IProps> = ({ products }) => {
+  const { isAuthUser } = useAppSelector((state) => state.authReducer);
   const navigate = useNavigate();
   const goToDetail = (product: IProduct) => {
     navigate(`${ROUTES.PRODUCT_DETAIL}/${product.id}`);
@@ -43,17 +45,18 @@ export const ListProduct = () => {
     <ListProductContainer>
       <Title>New Products</Title>
       <ProductGird>
-        {listProductData.map(product => (
-          <Product
-            product={product}
-            handleClickProduct={() => {
-              goToDetail(product);
-            }}
-            handleAddToCart={() => {
-              addProductToCart(product);
-            }}
-          ></Product>
-        ))}
+        {products &&
+          products.map((product) => (
+            <Product
+              product={product}
+              handleClickProduct={() => {
+                goToDetail(product);
+              }}
+              handleAddToCart={() => {
+                addProductToCart(product);
+              }}
+            ></Product>
+          ))}
       </ProductGird>
     </ListProductContainer>
   );

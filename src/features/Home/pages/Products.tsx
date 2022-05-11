@@ -1,5 +1,8 @@
-import React from 'react';
-import { Outlet } from 'react-router';
+import { getAllProduct } from 'features/Admin/redux/AdminThunk';
+import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
+import React, { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router';
+import { useAppDispatch, useAppSelector } from 'redux/store';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Category } from '../containers/Category';
@@ -25,13 +28,23 @@ const LeftContent = styled.div`
 `}
 `;
 export const Products = () => {
+  const { products } = useAppSelector((state) => state.adminReducer);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const getData = async () => {
+      dispatch(showLoading());
+      products && (await dispatch(getAllProduct()));
+      dispatch(hiddenLoading());
+    };
+    getData();
+  }, []);
   return (
     <ProductsContainer>
       <LeftContent>
         <Category />
       </LeftContent>
       <RightContent>
-        <ListProduct />
+        <ListProduct products={products} />
       </RightContent>
     </ProductsContainer>
   );

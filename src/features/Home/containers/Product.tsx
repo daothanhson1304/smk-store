@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BsHeart, BsCart, BsEye } from 'react-icons/bs';
 import BlogImage from '../../../assets/images/blog-1.jpg';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
-import { IProduct } from './types';
+import { IProduct } from 'features/Admin/types/types';
+import { useAppDispatch } from 'redux/store';
+import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
+import { getProductById } from 'features/Admin/redux/AdminThunk';
 
 const ProductItem = styled.div`
   ${tw`
@@ -94,7 +98,7 @@ export const Product: React.FC<IProps> = ({
   return (
     <ProductItem>
       <ProductBanner>
-        <img src={BlogImage} alt='' />
+        <img src={product.image} alt='' />
         <ProductBadge></ProductBadge>
         <div className='product-actions'>
           <ProductButton>

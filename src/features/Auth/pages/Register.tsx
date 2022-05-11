@@ -1,5 +1,5 @@
 import React from 'react';
-import { ROUTES } from 'constants/constants';
+import { GENDER, ROUTES } from 'constants/constants';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import tw from 'twin.macro';
@@ -23,6 +23,9 @@ const schema = yup
     username: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().required(),
+    mobileNumber: yup.string().required(),
+    address: yup.string().required(),
+    gender: yup.number().required(),
   })
   .required();
 export const Register = () => {
@@ -30,12 +33,12 @@ export const Register = () => {
     resolver: yupResolver(schema),
   });
   const dispatch = useAppDispatch();
-  const isLogin = useAppSelector(state => state.authReducer.isAuthUser);
+  const isLogin = useAppSelector((state) => state.authReducer.isAuthUser);
 
   const navigate = useNavigate();
   const onSubmit = async (data: ISignUpFormData) => {
     await dispatch(showLoading());
-    const roles: IRole[] = [{ _id: 1, name: 'ROLE_USER' }];
+    const roles: IRole[] = [{ id: 1, name: 'ROLE_USER' }];
     await dispatch(signUp({ ...data, roles }));
     await dispatch(hiddenLoading());
   };
@@ -81,6 +84,38 @@ export const Register = () => {
                 className='bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3'
               />
             </div>
+            <div className='mb-6 pt-3 rounded bg-gray-200'>
+              <label className='block text-gray-700 text-sm font-bold mb-2 ml-3'>
+                Mobile Number
+              </label>
+              <input
+                type='text'
+                id='mobile'
+                {...register('mobileNumber')}
+                className='bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3'
+              />
+            </div>
+            <div className='mb-6 pt-3 rounded bg-gray-200'>
+              <label className='block text-gray-700 text-sm font-bold mb-2 ml-3'>
+                Address
+              </label>
+              <input
+                type='text'
+                id='address'
+                {...register('address')}
+                className='bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3'
+              />
+            </div>
+            <div className='mb-6 pt-3 rounded bg-gray-200'>
+              <label className='block text-gray-700 text-sm font-bold mb-2 ml-3'>
+                Gender
+              </label>
+              <select {...register('gender')}>
+                <option value={GENDER.FEMALE}>Female</option>
+                <option value={GENDER.MALE}>Male</option>
+              </select>
+            </div>
+
             <div className='mb-6 pt-3 rounded bg-gray-200'>
               <label className='block text-gray-700 text-sm font-bold mb-2 ml-3'>
                 Password

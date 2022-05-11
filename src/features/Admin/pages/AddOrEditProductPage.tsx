@@ -8,6 +8,11 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from 'redux/store';
 import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
+import { PRODUCT_STATUS } from 'constants/constants';
+import { IProduct } from '../types/types';
+import { addProduct, editProduct } from '../redux/AdminThunk';
+import { useLocation } from 'react-router';
+import { UploadImage } from '../containers/UploadImage';
 const AddOrEditProductPageContainer = styled.div`
   ${tw`
 
@@ -79,66 +84,80 @@ const Image = styled.div`
     object-fit: cover;
   }
 `;
-const DropZone = styled.p`
+const Select = styled.select`
   ${tw`
-    px-12
-    py-14
+  px-2
+  py-[11px]
+  w-full
 `}
-  border: 1px dashed gray;
+  border: 1px solid #eff0f2;
 `;
 const schema = yup
   .object()
   .shape({
-    name: yup.string().required(),
-    category: yup.number().required(),
+    title: yup.string().required(),
+    image: yup.string().required(),
+    description: yup.string().required(),
     price: yup.number().required(),
     sale: yup.number().required(),
+    categoryId: yup.number().required(),
     quantity: yup.number().required(),
-    description: yup.string().required(),
-    imageUrl: yup.string().required(),
+    status: yup.number().required(),
   })
   .required();
-interface IProductFormData {
-  name: string;
-  category: number;
-  price: number;
-  sale: number;
-  quantity: number;
-  description: string;
-  imageUrl: string;
+interface IState {
+  productId: number;
 }
 
 export const AddOrEditProductPage = () => {
-  const { register, handleSubmit } = useForm<IProductFormData>({
-    resolver: yupResolver(schema),
-  });
+  const { register, handleSubmit, reset, setValue, getValues } =
+    useForm<IProduct>({
+      resolver: yupResolver(schema),
+    });
+  const { products } = useAppSelector((state) => state.adminReducer);
+  const { state } = useLocation();
   const dispatch = useAppDispatch();
-  const [files, setFiles] = useState([]);
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      'image/*': [],
-    },
-    onDrop: (acceptedFiles: any) => {
-      setFiles(
-        acceptedFiles.map((file: any) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
-    },
-  });
-  const onSubmitProduct = async (formData: IProductFormData) => {
+
+  const onSubmitProduct = async (formData: IProduct) => {
     dispatch(showLoading());
-    // await dispatch;
+    const data = state as IState;
+    let id = null;
+    if (state && data && data.productId) {
+      id = data.productId;
+    }
+    if (id) {
+      await dispatch(editProduct({ product: formData, id }));
+    } else {
+      await dispatch(addProduct(formData));
+    }
+
     dispatch(hiddenLoading());
+    reset();
+  };
+  const handleGetImageUrl = (url: string) => {
+    setValue('image', url);
   };
   useEffect(() => {
-    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () =>
-      files.forEach((file: any) => URL.revokeObjectURL(file.preview));
-  }, []);
-
+    const data = state as IState;
+    if (state && data && data.productId) {
+      const product = products.find(
+        (item: IProduct) => item.id === data.productId
+      );
+      if (product) {
+        reset({
+          title: product.title,
+          categoryId: product.categoryId,
+          price: product.price,
+          sale: product.sale,
+          quantity: product.quantity,
+          description: product.description,
+          image: product.image,
+          status: product.status,
+        });
+      }
+    }
+    reset();
+  }, [reset, products, state]);
   return (
     <AddOrEditProductPageContainer>
       <Header title={'Add Product'} />
@@ -147,11 +166,11 @@ export const AddOrEditProductPage = () => {
           <ContentLeft>
             <Group>
               <Label>Product Name</Label>
-              <input type='text' {...register('name')} />
+              <input type='text' {...register('title')} />
             </Group>
             <Group>
               <Label>Category</Label>
-              <input type='text' {...register('category')} />
+              <input type='text' {...register('categoryId')} />
             </Group>
             <LgGroup>
               <Group>
@@ -171,22 +190,10 @@ export const AddOrEditProductPage = () => {
           <ContentRight>
             <Group>
               <Label>Product image</Label>
-              <section className='container'>
-                <div {...getRootProps({ className: 'dropzone' })}>
-                  <input {...getInputProps()} {...register('imageUrl')} />
-                  <DropZone>
-                    Drag 'n' drop some files here, or click to select files
-                  </DropZone>
-                </div>
-              </section>
-              {files.length > 0 &&
-                files.map((file: any) => {
-                  return (
-                    <Image>
-                      <img src={file.preview} alt='' />
-                    </Image>
-                  );
-                })}
+              <UploadImage
+                saveImage={handleGetImageUrl}
+                urlImage={getValues('image')}
+              />
             </Group>
             <SubLabel>
               You need add image. Pay attention to the quality of the pictures
@@ -194,10 +201,21 @@ export const AddOrEditProductPage = () => {
               be in certain dimensions. Notice that the product shows all the
               details
             </SubLabel>
-            <Group>
-              <Label>Quantity</Label>
-              <input type='text' {...register('quantity')} />
-            </Group>
+            <LgGroup>
+              <Group>
+                <Label>Quantity</Label>
+                <input type='text' {...register('quantity')} />
+              </Group>
+              <Group>
+                <Label>Status</Label>
+                <Select {...register('status')}>
+                  <option value={PRODUCT_STATUS.NEW}>New</option>
+                  <option value={PRODUCT_STATUS.PROMOTION}>Promotion</option>
+                  <option value={PRODUCT_STATUS.SALE}>Sale</option>
+                  <option value={PRODUCT_STATUS.DEACTIVE}>DeActive</option>
+                </Select>
+              </Group>
+            </LgGroup>
             <button
               type='submit'
               className='text-white mt-8 bg-[#0e357b] cursor-pointer w-[200px]

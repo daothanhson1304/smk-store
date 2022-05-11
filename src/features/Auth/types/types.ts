@@ -7,6 +7,9 @@ export interface ISignUpFormData {
   password: string;
   email: string;
   roles: IRole[];
+  mobileNumber: string;
+  address: string;
+  gender: number;
 }
 export interface IUserInfo {
   email: string;
@@ -16,8 +19,9 @@ export interface IInitialState {
   token: string | null;
   isAuthUser: boolean;
   userInfo: IUserInfo;
+  roles: string[];
 }
 export interface IRole {
-  _id: number;
+  id: number;
   name: string;
 }

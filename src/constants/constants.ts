@@ -20,8 +20,18 @@ export const RESPONSE_STATUS = {
 };
 export const SIZE = [1, 2, 3, 4, 5];
 export const GENDER = {
-  MALE: 1,
-  FEMALE: 2,
+  MALE: 0,
+  FEMALE: 1,
+};
+export const PRODUCT_STATUS = {
+  DEACTIVE: 0,
+  PROMOTION: 1,
+  SALE: 2,
+  NEW: 3,
+};
+export const ROLES = {
+  ADMIN: 'ROLE_ADMIN',
+  USER: 'ROLE_USER',
 };
 export const listProductData = [
   {
