@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.0a58577b.css",
-    "main.js": "./static/js/main.e524927f.js",
+    "main.js": "./static/js/main.c2c30690.js",
     "static/media/banner-2.jpg": "./static/media/banner-2.b3092704c29b47c85d65.jpg",
     "static/media/blog-1.jpg": "./static/media/blog-1.a9420ee43374076d483c.jpg",
     "static/media/banner-1.jpg": "./static/media/banner-1.cfeba525561ff2e803bb.jpg",
@@ -20,10 +20,10 @@
     "static/media/perfume.svg": "./static/media/perfume.3ce762bb97824c69a094539ad78312ca.svg",
     "index.html": "./index.html",
     "main.0a58577b.css.map": "./static/css/main.0a58577b.css.map",
-    "main.e524927f.js.map": "./static/js/main.e524927f.js.map"
+    "main.c2c30690.js.map": "./static/js/main.c2c30690.js.map"
   },
   "entrypoints": [
     "static/css/main.0a58577b.css",
-    "static/js/main.e524927f.js"
+    "static/js/main.c2c30690.js"
   ]
 }
