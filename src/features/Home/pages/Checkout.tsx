@@ -22,11 +22,15 @@ export const Checkout = () => {
   const { orders } = useAppSelector((state) => state.adminReducer);
   const handleCheckout = async () => {
     dispatch(showLoading());
+    const invoice = orders.map((order) => {
+      return {
+        invoiceId: order.id ? order.id : 0,
+        quantity: order.quantity,
+      };
+    });
     const param = {
-      userId: id ? id : 0,
-      productIds: orders
-        .filter((order) => order.status === 0)
-        .map((order) => order.productId),
+      userId: id,
+      invoicerqList: invoice,
     };
     await dispatch(updateInvoices(param));
     dispatch(hiddenLoading());

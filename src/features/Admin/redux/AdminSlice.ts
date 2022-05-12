@@ -11,6 +11,7 @@ import {
   getAllInvoices,
   getAllProduct,
   getProductById,
+  updateInvoices,
 } from './AdminThunk';
 
 const initialState: IInitialAdminState = {
@@ -110,6 +111,16 @@ const adminSlice = createSlice({
         });
       })
       .addCase(getAllInvoices.rejected, (state, action) => {});
+    builder
+      .addCase(updateInvoices.pending, (state, action) => {})
+      .addCase(updateInvoices.fulfilled, (state, action) => {
+        state.orders = action.payload.map((order: any) => {
+          return {
+            ...order,
+          };
+        });
+      })
+      .addCase(updateInvoices.rejected, (state, action) => {});
   },
 });
 

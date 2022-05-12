@@ -78,6 +78,11 @@ const Icon = styled.div`
   text-xl
   `}
 `;
+const Time = styled.div`
+  ${tw`
+      text-sm
+  `}
+`;
 const Quantity = styled.div`
   ${tw`
     w-8
@@ -108,8 +113,9 @@ export const CartItem: React.FC<IProps> = ({
           <ProductDescription>{order.productDes}</ProductDescription>
         </ProductContent>
       </ProductInfo>
-      {!hiddenAction && (
-        <ProductActions>
+
+      <ProductActions>
+        {!hiddenAction && (
           <ProductQuantity>
             <Icon>
               <AiOutlinePlus></AiOutlinePlus>
@@ -119,7 +125,12 @@ export const CartItem: React.FC<IProps> = ({
               <AiOutlineMinus></AiOutlineMinus>
             </Icon>
           </ProductQuantity>
-          <ProductTotalPrice>{order.totalPrice}</ProductTotalPrice>
+        )}
+        <ProductTotalPrice>{`$${order.totalPrice}`}</ProductTotalPrice>
+        {hiddenAction && order.createAt && (
+          <Time>{`PaymentAt: ${order.createAt}`}</Time>
+        )}
+        {!hiddenAction && (
           <ProductDeleteButton
             onClick={() => {
               const id = order.id ? order.id : 0;
@@ -130,8 +141,8 @@ export const CartItem: React.FC<IProps> = ({
               <AiOutlineDelete></AiOutlineDelete>
             </Icon>
           </ProductDeleteButton>
-        </ProductActions>
-      )}
+        )}
+      </ProductActions>
     </CartItemContainer>
   );
 };

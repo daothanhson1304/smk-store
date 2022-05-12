@@ -38,6 +38,24 @@ const ListCart = styled.div`
     px-8
     rounded-xl
 `}
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: gray;
+  }
 `;
 export const ShoppingCartMain = () => {
   const { orders } = useAppSelector((state) => state.adminReducer);
