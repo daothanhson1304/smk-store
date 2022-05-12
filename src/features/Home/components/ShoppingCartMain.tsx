@@ -7,6 +7,7 @@ import { CartItem } from './CartItem';
 import { useAppDispatch, useAppSelector } from 'redux/store';
 import { hiddenLoading, showLoading } from 'features/App/redux/AppSlice';
 import { deleteInvoice, getAllInvoice } from 'features/Admin/redux/AdminThunk';
+import { decrement, increment } from 'features/Admin/redux/AdminSlice';
 const ShoppingCartMainContainer = styled.div`
   ${tw`
     mt-8
@@ -75,6 +76,12 @@ export const ShoppingCartMain = () => {
     await dispatch(deleteInvoice(id));
     dispatch(hiddenLoading());
   };
+  const handleInc = (id: number) => {
+    dispatch(increment(id));
+  };
+  const handleDes = (id: number) => {
+    dispatch(decrement(id));
+  };
   return (
     <ShoppingCartMainContainer>
       <ShoppingCartTitle>
@@ -87,7 +94,14 @@ export const ShoppingCartMain = () => {
             orders
               .filter((order) => order.status === 0)
               .map((order) => {
-                return <CartItem order={order} onDelete={handleDeleteOrder} />;
+                return (
+                  <CartItem
+                    order={order}
+                    onDelete={handleDeleteOrder}
+                    handleInc={handleInc}
+                    handleDes={handleDes}
+                  />
+                );
               })}
         </ListCart>
         <ShoppingCartText>History</ShoppingCartText>

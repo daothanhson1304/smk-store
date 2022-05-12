@@ -61,17 +61,22 @@ export const ListProduct: React.FC<IProps> = ({ products }) => {
       <Title>New Products</Title>
       <ProductGird>
         {products &&
-          products.map((product) => (
-            <Product
-              product={product}
-              handleClickProduct={() => {
-                goToDetail(product);
-              }}
-              handleAddToCart={() => {
-                addProductToCart(product);
-              }}
-            ></Product>
-          ))}
+          products.map((product) => {
+            if (product.status !== 0) {
+              return (
+                <Product
+                  product={product}
+                  handleClickProduct={() => {
+                    goToDetail(product);
+                  }}
+                  handleAddToCart={() => {
+                    addProductToCart(product);
+                  }}
+                ></Product>
+              );
+            }
+            return null;
+          })}
       </ProductGird>
     </ListProductContainer>
   );

@@ -53,7 +53,7 @@ const override = css`
 function App() {
   const isLoading = useAppSelector((state) => state.appReducer.isLoading);
   return (
-    <>
+    <div>
       {isLoading && (
         <LoadingContainer>
           <ScaleLoader color={'#fe919d'} loading={true} css={override} />
@@ -62,7 +62,7 @@ function App() {
 
       <AppContainer>
         <Routes>
-          <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route path={`/${ROUTES.LOGIN}`} element={<Login />} />
           <Route path={ROUTES.REGISTER} element={<Register />} />
         </Routes>
 
@@ -101,7 +101,7 @@ function App() {
           </Route>
         </Routes>
       </AppContainer>
-    </>
+    </div>
   );
 }
 

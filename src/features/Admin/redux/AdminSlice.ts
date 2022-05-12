@@ -24,7 +24,30 @@ const initialState: IInitialAdminState = {
 const adminSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    increment: (state, action) => {
+      state.orders = state.orders.map((item: any) => {
+        if (item.id === action.payload) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
+        }
+        return item;
+      });
+    },
+    decrement: (state, action) => {
+      state.orders = state.orders.map((item: any) => {
+        if (item.id === action.payload) {
+          return {
+            ...item,
+            quantity: item.quantity - 1,
+          };
+        }
+        return item;
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllCustomer.pending, (state, action) => {})
@@ -123,5 +146,5 @@ const adminSlice = createSlice({
       .addCase(updateInvoices.rejected, (state, action) => {});
   },
 });
-
+export const { increment, decrement } = adminSlice.actions;
 export default adminSlice.reducer;
