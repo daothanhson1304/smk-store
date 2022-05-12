@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.0a58577b.css",
-    "main.js": "/static/js/main.23eeb150.js",
-    "static/media/banner-2.jpg": "/static/media/banner-2.b3092704c29b47c85d65.jpg",
-    "static/media/blog-1.jpg": "/static/media/blog-1.a9420ee43374076d483c.jpg",
-    "static/media/banner-1.jpg": "/static/media/banner-1.cfeba525561ff2e803bb.jpg",
-    "static/media/master.png": "/static/media/master.869c0933913e582e53b8.png",
-    "static/media/banner-3.jpg": "/static/media/banner-3.d90f050178987f8c6ccc.jpg",
-    "static/media/blog-2.jpg": "/static/media/blog-2.d92785ec89049c48b072.jpg",
-    "static/media/blog-3.jpg": "/static/media/blog-3.f9c0a84dc3c1de83b698.jpg",
-    "static/media/paypal.png": "/static/media/paypal.c1fd5c06797068698262.png",
-    "static/media/visa.png": "/static/media/visa.a458aef00665743f91bf.png",
-    "static/media/jewelry.svg": "/static/media/jewelry.ab2fe0ed96fb1ce5c183de36b17db08a.svg",
-    "static/media/bag.svg": "/static/media/bag.6497715c44d4f30405854a5b003523ad.svg",
-    "static/media/shoes.svg": "/static/media/shoes.6b8c7e35c52f30b3ceef8db54a2799f6.svg",
-    "static/media/dress.svg": "/static/media/dress.2f3e70ae4d7bd2b77e7026c89ba2a5de.svg",
-    "static/media/cosmetics.svg": "/static/media/cosmetics.25862c7d35212b8f9844876302299c23.svg",
-    "static/media/glasses.svg": "/static/media/glasses.b7dcf4c6fe09a48d97628bd1b692c015.svg",
-    "static/media/perfume.svg": "/static/media/perfume.3ce762bb97824c69a094539ad78312ca.svg",
-    "index.html": "/index.html",
-    "main.0a58577b.css.map": "/static/css/main.0a58577b.css.map",
-    "main.23eeb150.js.map": "/static/js/main.23eeb150.js.map"
+    "main.css": "/smk-store/static/css/main.0a58577b.css",
+    "main.js": "/smk-store/static/js/main.51f61113.js",
+    "static/media/banner-2.jpg": "/smk-store/static/media/banner-2.b3092704c29b47c85d65.jpg",
+    "static/media/blog-1.jpg": "/smk-store/static/media/blog-1.a9420ee43374076d483c.jpg",
+    "static/media/banner-1.jpg": "/smk-store/static/media/banner-1.cfeba525561ff2e803bb.jpg",
+    "static/media/master.png": "/smk-store/static/media/master.869c0933913e582e53b8.png",
+    "static/media/banner-3.jpg": "/smk-store/static/media/banner-3.d90f050178987f8c6ccc.jpg",
+    "static/media/blog-2.jpg": "/smk-store/static/media/blog-2.d92785ec89049c48b072.jpg",
+    "static/media/blog-3.jpg": "/smk-store/static/media/blog-3.f9c0a84dc3c1de83b698.jpg",
+    "static/media/paypal.png": "/smk-store/static/media/paypal.c1fd5c06797068698262.png",
+    "static/media/visa.png": "/smk-store/static/media/visa.a458aef00665743f91bf.png",
+    "static/media/jewelry.svg": "/smk-store/static/media/jewelry.ab2fe0ed96fb1ce5c183de36b17db08a.svg",
+    "static/media/bag.svg": "/smk-store/static/media/bag.6497715c44d4f30405854a5b003523ad.svg",
+    "static/media/shoes.svg": "/smk-store/static/media/shoes.6b8c7e35c52f30b3ceef8db54a2799f6.svg",
+    "static/media/dress.svg": "/smk-store/static/media/dress.2f3e70ae4d7bd2b77e7026c89ba2a5de.svg",
+    "static/media/cosmetics.svg": "/smk-store/static/media/cosmetics.25862c7d35212b8f9844876302299c23.svg",
+    "static/media/glasses.svg": "/smk-store/static/media/glasses.b7dcf4c6fe09a48d97628bd1b692c015.svg",
+    "static/media/perfume.svg": "/smk-store/static/media/perfume.3ce762bb97824c69a094539ad78312ca.svg",
+    "index.html": "/smk-store/index.html",
+    "main.0a58577b.css.map": "/smk-store/static/css/main.0a58577b.css.map",
+    "main.51f61113.js.map": "/smk-store/static/js/main.51f61113.js.map"
   },
   "entrypoints": [
     "static/css/main.0a58577b.css",
-    "static/js/main.23eeb150.js"
+    "static/js/main.51f61113.js"
   ]
 }
