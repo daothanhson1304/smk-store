@@ -1,7 +1,7 @@
 export const ROUTES = {
   HOME: '/',
   PRODUCTS: 'products',
-  LOGIN: '/auth/login',
+  LOGIN: 'auth/login',
   REGISTER: '/auth/register',
   ABOUT: 'about',
   BLOGS: 'blogs',
@@ -14,6 +14,7 @@ export const ROUTES = {
   PRODUCTS_ADMIN: 'productsAdmin',
   INVOICES: 'invoices',
   ADD_OR_EDIT_PRODUCT: 'addOrEditProduct',
+  PRODUCT_TWO: 'product-two',
 };
 export const RESPONSE_STATUS = {
   SUCCESS: 200,

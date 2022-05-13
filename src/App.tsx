@@ -22,6 +22,7 @@ import { CustomersPage } from 'features/Admin/pages/CustomersPage';
 import { ProductsAdminPage } from 'features/Admin/pages/ProductsAdminPage';
 import { AddOrEditProductPage } from 'features/Admin/pages/AddOrEditProductPage';
 import { InvoicesPage } from 'features/Admin/pages/Invoices';
+import { ProductTwo } from 'features/Admin/pages/ProductTwo';
 const AppContainer = styled.div`
   ${tw`
       flex
@@ -51,9 +52,9 @@ const override = css`
   display: block;
 `;
 function App() {
-  const isLoading = useAppSelector((state) => state.appReducer.isLoading);
+  const isLoading = useAppSelector(state => state.appReducer.isLoading);
   return (
-    <>
+    <div>
       {isLoading && (
         <LoadingContainer>
           <ScaleLoader color={'#fe919d'} loading={true} css={override} />
@@ -62,7 +63,7 @@ function App() {
 
       <AppContainer>
         <Routes>
-          <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route path={`/${ROUTES.LOGIN}`} element={<Login />} />
           <Route path={ROUTES.REGISTER} element={<Register />} />
         </Routes>
 
@@ -89,6 +90,7 @@ function App() {
         <Routes>
           <Route path={ROUTES.ADMIN} element={<AdminPage />}>
             <Route path={ROUTES.CUSTOMERS} element={<CustomersPage />} />
+            <Route path={ROUTES.PRODUCT_TWO} element={<ProductTwo />} />
             <Route
               path={ROUTES.PRODUCTS_ADMIN}
               element={<ProductsAdminPage />}
@@ -101,7 +103,7 @@ function App() {
           </Route>
         </Routes>
       </AppContainer>
-    </>
+    </div>
   );
 }
 

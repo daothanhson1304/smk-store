@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { AiOutlineLogout } from 'react-icons/ai';
+import { useNavigate } from 'react-router';
+import { ROUTES } from 'constants/constants';
 interface IProps {
   userInfo: IUserInfo;
   adminPage?: boolean;
@@ -52,6 +54,12 @@ const UserAvatar = styled.div`
   `}
 `;
 export const UserInfo: React.FC<IProps> = ({ userInfo, adminPage }) => {
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('isAuthUser');
+    navigate(ROUTES.LOGIN);
+  };
   return (
     <UserInfoContainer>
       <UserAvatar>{userInfo.username.substring(0, 2)}</UserAvatar>
@@ -60,7 +68,7 @@ export const UserInfo: React.FC<IProps> = ({ userInfo, adminPage }) => {
         <UserEmail>{userInfo.email}</UserEmail>
       </UserContent>
       {!adminPage && (
-        <Icon>
+        <Icon onClick={handleLogOut}>
           <AiOutlineLogout></AiOutlineLogout>
         </Icon>
       )}

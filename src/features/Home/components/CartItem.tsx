@@ -98,11 +98,15 @@ interface IProps {
   order: IOrder;
   onDelete?: (id: number) => void;
   hiddenAction?: boolean;
+  handleInc?: (id: number) => void;
+  handleDes?: (id: number) => void;
 }
 export const CartItem: React.FC<IProps> = ({
   order,
   onDelete,
   hiddenAction,
+  handleInc,
+  handleDes,
 }) => {
   return (
     <CartItemContainer>
@@ -117,12 +121,22 @@ export const CartItem: React.FC<IProps> = ({
       <ProductActions>
         {!hiddenAction && (
           <ProductQuantity>
-            <Icon>
-              <AiOutlinePlus></AiOutlinePlus>
+            <Icon
+              onClick={() => {
+                const id = order.id ? order.id : 0;
+                handleDes && handleDes(id);
+              }}
+            >
+              <AiOutlineMinus></AiOutlineMinus>
             </Icon>
             <Quantity>{order.quantity}</Quantity>
-            <Icon>
-              <AiOutlineMinus></AiOutlineMinus>
+            <Icon
+              onClick={() => {
+                const id = order.id ? order.id : 0;
+                handleInc && handleInc(id);
+              }}
+            >
+              <AiOutlinePlus></AiOutlinePlus>
             </Icon>
           </ProductQuantity>
         )}
